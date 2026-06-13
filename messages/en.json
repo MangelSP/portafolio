@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Home",
+    "expertise": "Expertise",
+    "work": "Work",
+    "experience": "Experience",
+    "github": "GitHub",
+    "contact": "Contact"
+  },
+  "gate": {
+    "subtitle": "Full-Stack Software Engineer & Architect",
+    "choose": "Choose your experience",
+    "modern": {
+      "name": "MODERN",
+      "description": "Minimal & Clean"
+    },
+    "corporate": {
+      "name": "CORPORATE",
+      "description": "Clean & Precise"
+    },
+    "dynamic": {
+      "name": "DYNAMIC",
+      "description": "Bold & Animated"
+    }
+  },
+  "hero": {
+    "viewWork": "View Work",
+    "contact": "Contact Me",
+    "location": "Based in"
+  },
+  "expertise": {
+    "title": "My Expertise",
+    "subtitle": "Technologies and tools I work with daily"
+  },
+  "work": {
+    "title": "My Work",
+    "subtitle": "Selected projects and case studies",
+    "filterAll": "All",
+    "filterWeb": "Web",
+    "filterMobile": "Mobile",
+    "filterArchitecture": "Architecture",
+    "viewProject": "View Project"
+  },
+  "experience": {
+    "title": "Experience",
+    "subtitle": "My professional journey"
+  },
+  "github": {
+    "title": "GitHub Activity",
+    "subtitle": "Open source contributions and activity",
+    "repos": "Public Repos",
+    "followers": "Followers",
+    "following": "Following"
+  },
+  "contact": {
+    "title": "Let's Work Together",
+    "subtitle": "Open to freelance, full-time, and consulting opportunities",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "whatsapp": "WhatsApp"
+  },
+  "metrics": {
+    "years": "Years",
+    "projects": "Projects",
+    "technologies": "Technologies"
+  }
+}

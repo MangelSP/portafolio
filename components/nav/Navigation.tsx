@@ -1,6 +1,7 @@
 // components/nav/Navigation.tsx
 'use client'
 
+import { Layers } from 'lucide-react'
 import { useThemeStore } from '@/store/themeStore'
 import type { Locale } from '@/data/portfolioConfig'
 
@@ -19,7 +20,7 @@ const navLinks = [
 ]
 
 export default function Navigation() {
-  const { locale, setLocale, theme } = useThemeStore()
+  const { locale, setLocale, theme, openGate } = useThemeStore()
   const labels = navLabels[locale]
 
   return (
@@ -44,20 +45,29 @@ export default function Navigation() {
           ))}
         </div>
 
-        <div className="flex gap-1">
-          {(['en', 'es'] as Locale[]).map((loc) => (
-            <button
-              key={loc}
-              onClick={() => setLocale(loc)}
-              className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${
-                locale === loc
-                  ? 'bg-[var(--accent)] text-white'
-                  : 'text-[var(--text-muted)] hover:text-[var(--text)]'
-              }`}
-            >
-              {loc.toUpperCase()}
-            </button>
-          ))}
+        <div className="flex items-center gap-2">
+          <button
+            onClick={openGate}
+            title={locale === 'en' ? 'Change theme' : 'Cambiar tema'}
+            className="p-2 rounded-md text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--bg-secondary)] transition-colors"
+          >
+            <Layers size={16} />
+          </button>
+          <div className="flex gap-1">
+            {(['en', 'es'] as Locale[]).map((loc) => (
+              <button
+                key={loc}
+                onClick={() => setLocale(loc)}
+                className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${
+                  locale === loc
+                    ? 'bg-[var(--accent)] text-white'
+                    : 'text-[var(--text-muted)] hover:text-[var(--text)]'
+                }`}
+              >
+                {loc.toUpperCase()}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </nav>

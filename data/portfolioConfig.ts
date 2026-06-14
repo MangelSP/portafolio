@@ -6,22 +6,23 @@ export type Locale = 'en' | 'es'
 
 export const config = {
   personalInfo: {
-    name: 'Randy Gonzalez',
+    name: 'Miguel Angel Sanchez Peralta',
     title: {
-      en: 'Full-Stack Software Engineer & Architect',
-      es: 'Ingeniero de Software Full-Stack & Arquitecto',
+      en: 'Senior Full-Stack Engineer & Architect',
+      es: 'Ingeniero Full-Stack Senior & Arquitecto',
     } as LocalizedString,
     bio: {
-      en: 'I build scalable systems and clean interfaces. Focused on .NET, NestJS, Next.js, and Flutter — from architecture decisions to pixel-perfect UIs.',
-      es: 'Construyo sistemas escalables e interfaces limpias. Enfocado en .NET, NestJS, Next.js y Flutter — desde decisiones de arquitectura hasta UIs pixel-perfect.',
+      en: 'Engineer with 6+ years of experience in .NET, specialized in microservices design, cloud solutions on Azure, and scalable backend development. Skilled in React, Next.js, NestJS, and Flutter.',
+      es: 'Ingeniero con más de 6 años de experiencia en .NET, especializado en diseño de microservicios, soluciones en la nube con Azure y desarrollo backend escalable. Hábil en React, Next.js, NestJS y Flutter.',
     } as LocalizedString,
     location: 'República Dominicana',
     avatar: '/avatar.svg',
     contact: {
-      email: 'tu@email.com',
-      linkedin: 'https://linkedin.com/in/tu-perfil',
-      github: process.env.NEXT_PUBLIC_GITHUB_USERNAME ?? 'randyglez',
-      whatsapp: '+18099999999',
+      email: 'yacalos_@hotmail.com',
+      linkedin: 'https://www.linkedin.com/in/miguel-angel-sanchez-peralta-bb3941159/',
+      instagram: 'https://www.instagram.com/mangeldevs/',
+      github: process.env.NEXT_PUBLIC_GITHUB_USERNAME ?? 'mangeldevs',
+      whatsapp: '+18295181341',
     },
   },
 
@@ -30,28 +31,28 @@ export const config = {
       category: { en: 'Backend & Architecture', es: 'Backend & Arquitectura' } as LocalizedString,
       icon: 'server' as const,
       description: {
-        en: 'Building robust APIs and distributed systems with Clean Architecture principles.',
-        es: 'Construyendo APIs robustas y sistemas distribuidos con principios de Clean Architecture.',
+        en: 'Building robust APIs, microservices, and cloud solutions with .NET Core, NestJS and Azure.',
+        es: 'Construyendo APIs robustas, microservicios y soluciones en la nube con .NET Core, NestJS y Azure.',
       } as LocalizedString,
-      skills: ['.NET Core 9', 'NestJS', 'SQL Server', 'Clean Architecture', 'REST', 'WebSockets'],
+      skills: ['.NET Core', 'NestJS', 'Node.js', 'SQL Server', 'PostgreSQL', 'MongoDB', 'Azure Cloud', 'Microservices', 'RabbitMQ', 'Docker'],
     },
     {
       category: { en: 'Frontend', es: 'Frontend' } as LocalizedString,
       icon: 'monitor' as const,
       description: {
-        en: 'Crafting fast, accessible, and interactive web experiences.',
-        es: 'Creando experiencias web rápidas, accesibles e interactivas.',
+        en: 'Crafting fast, accessible, and interactive web experiences with React and Next.js.',
+        es: 'Creando experiencias web rápidas, accesibles e interactivas con React y Next.js.',
       } as LocalizedString,
-      skills: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Framer Motion'],
+      skills: ['React', 'Next.js', 'Angular', 'TypeScript', 'Tailwind CSS', 'Redux', 'Styled Components'],
     },
     {
-      category: { en: 'Mobile', es: 'Mobile' } as LocalizedString,
+      category: { en: 'Mobile & DevOps', es: 'Mobile & DevOps' } as LocalizedString,
       icon: 'smartphone' as const,
       description: {
-        en: 'Cross-platform mobile apps with Flutter for iOS and Android.',
-        es: 'Apps móviles multiplataforma con Flutter para iOS y Android.',
+        en: 'Cross-platform mobile apps with Flutter, containerization with Docker and Kubernetes.',
+        es: 'Apps móviles multiplataforma con Flutter, contenedores con Docker y Kubernetes.',
       } as LocalizedString,
-      skills: ['Flutter', 'Dart'],
+      skills: ['Flutter', 'Swift', 'Docker', 'Kubernetes', 'Azure DevOps', 'Jest', 'TypeORM', 'Prisma'],
     },
   ],
 
@@ -86,23 +87,45 @@ export const config = {
 
   experience: [
     {
-      role: { en: 'Full-Stack Engineer', es: 'Ingeniero Full-Stack' } as LocalizedString,
-      company: 'Tu Empresa',
-      period: '2023 – Present',
-      location: 'República Dominicana',
+      role: { en: 'Senior Fullstack Engineer', es: 'Ingeniero Fullstack Senior' } as LocalizedString,
+      company: 'Humano Seguros',
+      period: 'Feb 2024 – Present',
+      location: 'República Dominicana (Remoto)',
       description: {
-        en: 'Led development of scalable web and mobile applications using .NET, React, and Flutter.',
-        es: 'Lideré el desarrollo de aplicaciones web y móviles escalables usando .NET, React y Flutter.',
+        en: 'Improved the codebase by fixing critical bugs with TypeScript and Jest. Designed and integrated services for mobile, web, and desktop platforms on Azure Cloud. Built high-performance backend apps with .NET Core and improved scalability via microservices architecture.',
+        es: 'Mejoré el código base corrigiendo errores críticos con TypeScript y Jest. Diseñé e integré servicios para plataformas móvil, web y escritorio en Azure Cloud. Construí apps backend de alto rendimiento con .NET Core y mejoré la escalabilidad con arquitectura de microservicios.',
       } as LocalizedString,
-      tech: ['.NET', 'React', 'SQL Server', 'Flutter'],
+      tech: ['.NET Core', 'React 18', 'Angular', 'NestJS', 'Node.js', 'SQL Server', 'MongoDB', 'PostgreSQL', 'Azure Cloud', 'Docker'],
+    },
+    {
+      role: { en: 'Fullstack Engineer', es: 'Ingeniero Fullstack' } as LocalizedString,
+      company: 'Wepsys SRL',
+      period: 'Feb 2022 – Feb 2024',
+      location: 'República Dominicana (Híbrido)',
+      description: {
+        en: 'Developed and maintained web apps with Angular and .NET Core. Implemented RabbitMQ messaging, BPMN.js process automation, and migrated to Microsoft services including Dynamics 365 CRM. Used Power BI for advanced analytics.',
+        es: 'Desarrollé y mantuve aplicaciones web con Angular y .NET Core. Implementé mensajería con RabbitMQ, automatización con BPMN.js y migré a servicios Microsoft incluyendo Dynamics 365 CRM. Usé Power BI para análisis avanzado.',
+      } as LocalizedString,
+      tech: ['Angular', '.NET Core', 'Node.js', 'React', 'Flutter', 'Swift', 'Java', 'RabbitMQ', 'MongoDB', 'Docker'],
+    },
+    {
+      role: { en: 'Backend Engineer / Dynamics 365 Developer', es: 'Ingeniero Backend / Desarrollador Dynamics 365' } as LocalizedString,
+      company: 'LogicOne SRL',
+      period: 'Aug 2017 – May 2022',
+      location: 'República Dominicana (Presencial)',
+      description: {
+        en: 'Developed RESTful APIs as backend for web applications, improving scalability and reducing latency by 10%. Implemented Dynamics 365 CRM and Power BI solutions.',
+        es: 'Desarrollé APIs RESTful como backend para aplicaciones web, mejorando la escalabilidad y reduciendo la latencia en un 10%. Implementé soluciones de Dynamics 365 CRM y Power BI.',
+      } as LocalizedString,
+      tech: ['.NET Core', 'C#', 'Azure', 'Dynamics 365 CRM', 'Power BI', 'SQL Server', 'MySQL'],
     },
   ],
 
   testimonials: [
     {
       quote: {
-        en: 'Randy delivered beyond expectations — clean code, on time, and great communication.',
-        es: 'Randy entregó más allá de las expectativas — código limpio, a tiempo y gran comunicación.',
+        en: 'Miguel delivered beyond expectations — clean code, on time, and great communication.',
+        es: 'Miguel entregó más allá de las expectativas — código limpio, a tiempo y gran comunicación.',
       } as LocalizedString,
       author: 'Cliente Ejemplo',
       title: { en: 'CEO at Startup', es: 'CEO en Startup' } as LocalizedString,
@@ -110,17 +133,22 @@ export const config = {
   ],
 
   certifications: [
-    {
-      name: 'Microsoft Certified: Azure Developer',
-      issuer: 'Microsoft',
-      year: 2024,
-      url: '#',
-    },
+    { name: 'JavaScript Moderno', issuer: 'Udemy', year: 2022, url: '#' },
+    { name: 'React.js & Next.js', issuer: 'Udemy', year: 2022, url: '#' },
+    { name: 'NestJS & Node.js', issuer: 'Udemy', year: 2023, url: '#' },
+    { name: 'Flutter', issuer: 'Udemy', year: 2023, url: '#' },
+    { name: 'Prompt Engineering', issuer: 'Platzi', year: 2024, url: '#' },
+    { name: 'Unit Testing con C# y .NET', issuer: 'Platzi', year: 2024, url: '#' },
+  ],
+
+  education: [
+    { institution: 'UNAPEC', degree: { en: 'Software Engineering', es: 'Ingeniería de Software' } as LocalizedString, year: '' },
+    { institution: 'ITLA', degree: { en: 'Programming & SQL Server', es: 'Programación & SQL Server' } as LocalizedString, year: '' },
   ],
 
   metrics: {
-    years: 4,
-    projects: 10,
-    technologies: 8,
+    years: 6,
+    projects: 15,
+    technologies: 20,
   },
 } as const

@@ -2,7 +2,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, Globe, GitFork, MessageCircle } from 'lucide-react'
+import { Mail, Globe, GitFork, MessageCircle, Camera } from 'lucide-react'
 import { useL } from '@/lib/usePortfolioLocale'
 import { config } from '@/data/portfolioConfig'
 
@@ -17,13 +17,19 @@ const contactLinks = [
     icon: Globe,
     label: { en: 'LinkedIn', es: 'LinkedIn' },
     getValue: () => config.personalInfo.contact.linkedin,
-    display: () => 'linkedin.com/in/randy',
+    display: () => 'linkedin.com/in/mangel',
   },
   {
     icon: GitFork,
     label: { en: 'GitHub', es: 'GitHub' },
     getValue: () => `https://github.com/${config.personalInfo.contact.github}`,
     display: () => `github.com/${config.personalInfo.contact.github}`,
+  },
+  {
+    icon: Camera,
+    label: { en: 'Instagram', es: 'Instagram' },
+    getValue: () => config.personalInfo.contact.instagram,
+    display: () => '@mangeldevs',
   },
   {
     icon: MessageCircle,
@@ -52,7 +58,7 @@ export default function Contact() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {contactLinks.map(({ icon: Icon, label, getValue, display }, i) => (
             <motion.a
               key={label.en}
@@ -75,7 +81,7 @@ export default function Contact() {
         </div>
 
         <p className="mt-16 text-[var(--text-muted)] text-sm">
-          © {new Date().getFullYear()} Randy Gonzalez · {l({ en: 'Built with Next.js', es: 'Construido con Next.js' })}
+          © {new Date().getFullYear()} Miguel Angel Sanchez Peralta · {l({ en: 'Built with Next.js', es: 'Construido con Next.js' })}
         </p>
       </div>
     </section>

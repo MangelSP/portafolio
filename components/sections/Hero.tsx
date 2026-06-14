@@ -34,13 +34,20 @@ function CoinAvatar({ theme }: { theme: string | null }) {
   const [flipped, setFlipped] = useState(false)
   const [spinning, setSpinning] = useState(false)
 
-  const handleClick = async () => {
+  const handleClick = () => {
     if (spinning) return
     setSpinning(true)
-    // Toggle after half the spin duration so face swap is hidden mid-rotation
-    setTimeout(() => setFlipped((f) => !f), 400)
-    setTimeout(() => setSpinning(false), 800)
+    setTimeout(() => {
+      setFlipped((f) => !f)
+      setSpinning(false)
+    }, 500)
   }
+
+  // When not spinning: 0 = front (avatar), 180 = back (photo)
+  // When spinning into flipped: animate through extra 360 so it spins visually
+  const targetRotation = spinning
+    ? (flipped ? 180 + 360 : 0 + 360)  // spin a full extra turn while transitioning
+    : (flipped ? 180 : 0)               // settle at correct face
 
   const borderClass = theme === 'dynamic'
     ? 'border-purple-500 shadow-[0_0_40px_rgba(124,58,237,0.5)]'
@@ -52,10 +59,10 @@ function CoinAvatar({ theme }: { theme: string | null }) {
       style={{ perspective: '1000px' }}
       onClick={handleClick}
     >
-      {/* 3D flip container — NO overflow-hidden here, that breaks preserve-3d */}
+      {/* 3D flip container — NO overflow-hidden here, breaks preserve-3d */}
       <motion.div
-        animate={{ rotateY: spinning ? (flipped ? -180 : 180) : 0 }}
-        transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+        animate={{ rotateY: targetRotation }}
+        transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
         style={{ transformStyle: 'preserve-3d', position: 'relative', width: '100%', height: '100%' }}
       >
         {/* FRONT — avatar cartoon */}
@@ -66,7 +73,7 @@ function CoinAvatar({ theme }: { theme: string | null }) {
           <Image src="/avatar.png" alt="Avatar" fill className="object-cover" priority />
         </div>
 
-        {/* BACK — real photo */}
+        {/* BACK — real photo, pre-rotated 180° so it shows when container is at 180° */}
         <div
           className={`absolute inset-0 rounded-full overflow-hidden border-4 ${borderClass}`}
           style={{
@@ -86,7 +93,7 @@ function CoinAvatar({ theme }: { theme: string | null }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 0.4 }}
       >
-        {flipped ? '← Volver' : '👆 Click'}
+        {flipped ? '← Avatar' : '👆 Click'}
       </motion.div>
     </div>
   )

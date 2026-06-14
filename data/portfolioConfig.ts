@@ -16,7 +16,7 @@ export const config = {
       es: 'Ingeniero con más de 6 años de experiencia en .NET, especializado en diseño de microservicios, soluciones en la nube con Azure y desarrollo backend escalable. Hábil en React, Next.js, NestJS y Flutter.',
     } as LocalizedString,
     location: 'República Dominicana',
-    avatar: '/avatar.svg',
+    avatar: '/avatar.png',
     contact: {
       email: 'yacalos_@hotmail.com',
       linkedin: 'https://www.linkedin.com/in/miguel-angel-sanchez-peralta-bb3941159/',

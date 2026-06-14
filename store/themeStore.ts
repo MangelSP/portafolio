@@ -5,17 +5,28 @@ import type { Theme, Locale } from '../data/portfolioConfig'
 interface ThemeStore {
   theme: Theme | null
   locale: Locale
+  darkMode: boolean
   hasChosenTheme: boolean
   gateOpen: boolean
   setTheme: (theme: Theme) => void
   setLocale: (locale: Locale) => void
+  toggleDark: () => void
   openGate: () => void
   initFromStorage: () => void
 }
 
-export const useThemeStore = create<ThemeStore>((set) => ({
+function applyDark(dark: boolean) {
+  if (dark) {
+    document.documentElement.setAttribute('data-dark', 'true')
+  } else {
+    document.documentElement.removeAttribute('data-dark')
+  }
+}
+
+export const useThemeStore = create<ThemeStore>((set, get) => ({
   theme: null,
   locale: 'en',
+  darkMode: false,
   hasChosenTheme: false,
   gateOpen: true,
 
@@ -25,6 +36,15 @@ export const useThemeStore = create<ThemeStore>((set) => ({
       document.documentElement.setAttribute('data-theme', theme)
     }
     set({ theme, hasChosenTheme: true, gateOpen: false })
+  },
+
+  toggleDark: () => {
+    const next = !get().darkMode
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('preferred-dark', String(next))
+      applyDark(next)
+    }
+    set({ darkMode: next })
   },
 
   openGate: () => {
@@ -42,11 +62,13 @@ export const useThemeStore = create<ThemeStore>((set) => ({
     if (typeof window === 'undefined') return
     const savedTheme = localStorage.getItem('preferred-theme') as Theme | null
     const savedLocale = (localStorage.getItem('preferred-locale') as Locale) ?? 'en'
+    const savedDark = localStorage.getItem('preferred-dark') === 'true'
+    applyDark(savedDark)
     if (savedTheme) {
       document.documentElement.setAttribute('data-theme', savedTheme)
-      set({ theme: savedTheme, locale: savedLocale, hasChosenTheme: true, gateOpen: false })
+      set({ theme: savedTheme, locale: savedLocale, darkMode: savedDark, hasChosenTheme: true, gateOpen: false })
     } else {
-      set({ locale: savedLocale })
+      set({ locale: savedLocale, darkMode: savedDark })
     }
   },
 }))

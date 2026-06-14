@@ -1,0 +1,11 @@
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#14b8a6"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#g)"/>
+  <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="36" font-family="sans-serif" font-weight="bold">Travel-RD Mobile</text>
+  <text x="50%" y="62%" dominant-baseline="middle" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="18" font-family="sans-serif">Flutter · iOS &amp; Android</text>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#db2777"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#g)"/>
+  <!-- Phone mockup -->
+  <rect x="290" y="60" width="220" height="330" rx="24" fill="rgba(0,0,0,0.35)"/>
+  <rect x="300" y="75" width="200" height="305" rx="16" fill="rgba(255,255,255,0.1)"/>
+  <!-- Screen content -->
+  <rect x="315" y="95" width="170" height="20" rx="6" fill="rgba(255,255,255,0.5)"/>
+  <rect x="315" y="125" width="170" height="60" rx="8" fill="rgba(255,255,255,0.15)"/>
+  <rect x="315" y="197" width="80" height="50" rx="8" fill="rgba(255,255,255,0.12)"/>
+  <rect x="405" y="197" width="80" height="50" rx="8" fill="rgba(255,255,255,0.12)"/>
+  <rect x="315" y="257" width="170" height="12" rx="6" fill="rgba(255,255,255,0.2)"/>
+  <rect x="315" y="279" width="130" height="12" rx="6" fill="rgba(255,255,255,0.15)"/>
+  <rect x="315" y="315" width="170" height="36" rx="10" fill="rgba(255,255,255,0.3)"/>
+  <!-- Notch -->
+  <rect x="370" y="68" width="60" height="10" rx="5" fill="rgba(0,0,0,0.5)"/>
+</svg>

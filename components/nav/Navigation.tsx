@@ -29,7 +29,7 @@ export default function Navigation() {
       style={{ backgroundColor: 'var(--nav-bg)' }}
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between">
-        <span className="font-bold text-[var(--text)] tracking-tight">RG</span>
+        <span className="font-bold text-[var(--text)] tracking-tight">MG</span>
 
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (

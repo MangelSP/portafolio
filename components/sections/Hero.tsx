@@ -2,7 +2,8 @@
 'use client'
 
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, useAnimation } from 'framer-motion'
+import { useState } from 'react'
 import { GitFork, Globe, Mail, MessageCircle } from 'lucide-react'
 import { useThemeStore } from '@/store/themeStore'
 import { useL } from '@/lib/usePortfolioLocale'
@@ -29,6 +30,68 @@ function TypewriterText({ text }: { text: string }) {
   )
 }
 
+function CoinAvatar({ theme }: { theme: string | null }) {
+  const [flipped, setFlipped] = useState(false)
+  const [spinning, setSpinning] = useState(false)
+
+  const handleClick = async () => {
+    if (spinning) return
+    setSpinning(true)
+    // Toggle after half the spin duration so face swap is hidden mid-rotation
+    setTimeout(() => setFlipped((f) => !f), 400)
+    setTimeout(() => setSpinning(false), 800)
+  }
+
+  const borderClass = theme === 'dynamic'
+    ? 'border-purple-500 shadow-[0_0_40px_rgba(124,58,237,0.5)]'
+    : 'border-[var(--border)]'
+
+  return (
+    <div
+      className="relative cursor-pointer select-none w-48 h-48 md:w-64 md:h-64"
+      style={{ perspective: '1000px' }}
+      onClick={handleClick}
+    >
+      {/* 3D flip container — NO overflow-hidden here, that breaks preserve-3d */}
+      <motion.div
+        animate={{ rotateY: spinning ? (flipped ? -180 : 180) : 0 }}
+        transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+        style={{ transformStyle: 'preserve-3d', position: 'relative', width: '100%', height: '100%' }}
+      >
+        {/* FRONT — avatar cartoon */}
+        <div
+          className={`absolute inset-0 rounded-full overflow-hidden border-4 ${borderClass}`}
+          style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+        >
+          <Image src="/avatar.png" alt="Avatar" fill className="object-cover" priority />
+        </div>
+
+        {/* BACK — real photo */}
+        <div
+          className={`absolute inset-0 rounded-full overflow-hidden border-4 ${borderClass}`}
+          style={{
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
+            transform: 'rotateY(180deg)',
+          }}
+        >
+          <Image src="/foto-perfil.jpg" alt="Miguel Angel" fill className="object-cover" />
+        </div>
+      </motion.div>
+
+      {/* Hint badge */}
+      <motion.div
+        className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[var(--accent)] text-white text-xs px-3 py-1 rounded-full whitespace-nowrap pointer-events-none z-10"
+        initial={{ opacity: 0, y: 4 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1, duration: 0.4 }}
+      >
+        {flipped ? '← Volver' : '👆 Click'}
+      </motion.div>
+    </div>
+  )
+}
+
 export default function Hero() {
   const { theme } = useThemeStore()
   const l = useL()
@@ -43,12 +106,7 @@ export default function Hero() {
 
   const avatarEl = (
     <div className="relative">
-      <div
-        className={`relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4
-          ${theme === 'dynamic' ? 'border-purple-500 shadow-[0_0_40px_rgba(124,58,237,0.5)]' : 'border-[var(--border)]'}`}
-      >
-        <Image src={personalInfo.avatar} alt={personalInfo.name} fill className="object-cover" />
-      </div>
+      <CoinAvatar theme={theme} />
     </div>
   )
 
@@ -124,8 +182,12 @@ function HeroContent({
   return (
     <div className={centered ? 'text-center' : ''}>
       <h1
-        className={`text-4xl md:text-6xl font-bold mb-4 leading-tight text-[var(--text)]
-          ${gradient ? 'bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent' : ''}`}
+        className={`text-4xl md:text-6xl font-bold mb-4 leading-tight
+          ${centered ? 'text-center' : ''}
+          ${gradient
+            ? 'bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent'
+            : 'text-[var(--text)]'
+          }`}
       >
         {personalInfo.name}
       </h1>

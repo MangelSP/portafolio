@@ -14,14 +14,14 @@ interface GitHubData {
 }
 
 const statsThemeMap: Record<string, string> = {
-  modern: 'default',
-  corporate: 'default',
+  modern: 'graywhite',
+  corporate: 'vue',
   dynamic: 'tokyonight',
 }
 
 const graphThemeMap: Record<string, string> = {
-  modern: 'minimal',
-  corporate: 'github',
+  modern: 'react',
+  corporate: 'github-compact',
   dynamic: 'tokyo-night',
 }
 
@@ -40,6 +40,14 @@ export default function GitHubStats() {
 
   const statsTheme = statsThemeMap[theme ?? 'modern']
   const graphTheme = graphThemeMap[theme ?? 'modern']
+
+  // bg_color for embedded images — matches each theme's --bg (without #)
+  const bgColorMap: Record<string, string> = {
+    modern: 'ffffff',
+    corporate: 'f8f9fa',
+    dynamic: '00000000',
+  }
+  const bgColor = bgColorMap[theme ?? 'modern']
 
   return (
     <section id="github" className="py-24 bg-[var(--bg)]">
@@ -89,13 +97,13 @@ export default function GitHubStats() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={`https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=${statsTheme}&hide_border=true&bg_color=00000000`}
+            src={`https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=${statsTheme}&hide_border=true&bg_color=${bgColor}`}
             alt="GitHub Stats"
             className="w-full rounded-xl"
           />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&theme=${statsTheme}&hide_border=true&bg_color=00000000`}
+            src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&theme=${statsTheme}&hide_border=true&bg_color=${bgColor}`}
             alt="Top Languages"
             className="w-full rounded-xl"
           />
@@ -110,7 +118,7 @@ export default function GitHubStats() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={`https://github-readme-activity-graph.vercel.app/graph?username=${username}&theme=${graphTheme}&hide_border=true&bg_color=00000000`}
+            src={`https://github-readme-activity-graph.vercel.app/graph?username=${username}&theme=${graphTheme}&hide_border=true&bg_color=${bgColor}`}
             alt="Contribution Graph"
             className="w-full rounded-xl"
           />

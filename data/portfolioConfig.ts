@@ -97,6 +97,45 @@ export const config = {
       url: '#',
     },
     {
+      id: 'appstore-resizer',
+      title: 'App Store Resizer',
+      description: {
+        en: '100% client-side web tool to resize screenshots, generate app icons, and create image sets for App Store Connect (iOS) and Google Play. Features an interactive crop editor, smart platform detection, bulk ZIP export, and supports all iOS/Android/watchOS/macOS icon sizes — no server, no uploads.',
+        es: 'Herramienta web 100% client-side para redimensionar screenshots, generar íconos y crear image sets para App Store Connect (iOS) y Google Play. Incluye editor de recorte interactivo, detección automática de plataforma, exportación ZIP masiva y soporte completo de tamaños iOS/Android/watchOS/macOS — sin servidor ni subidas.',
+      } as LocalizedString,
+      image: '/projects/appstore-resizer-placeholder.svg',
+      placeholderGradient: 'from-sky-500 to-green-400',
+      tags: ['Next.js', 'TypeScript', 'Canvas API', 'JSZip', 'Tailwind CSS', 'Vercel'],
+      category: 'web' as const,
+      url: 'https://app-store-resizer.vercel.app/',
+    },
+    {
+      id: 'gestor-citas',
+      title: 'Gestor de Citas — API',
+      description: {
+        en: 'Multi-tenant backend API for barbershop & salon appointment management. Built with Express.js: full auth (email/username, refresh tokens), role-based user management, appointment CRUD, dynamic service pricing, real-time push notifications via FCM, email confirmation, and Swagger UI docs. Ready for Vercel deploy.',
+        es: 'API backend multi-tenant para gestión de citas en barberías y salones de belleza. Construido con Express.js: autenticación completa (email/username, refresh tokens), gestión de usuarios por roles, CRUD de citas, precios dinámicos, notificaciones push en tiempo real vía FCM, confirmación por email y documentación Swagger UI.',
+      } as LocalizedString,
+      image: '/projects/gestor-citas-placeholder.svg',
+      placeholderGradient: 'from-emerald-600 to-green-400',
+      tags: ['Express.js', 'Node.js', 'JWT', 'FCM', 'Swagger', 'REST API', 'Multi-tenant'],
+      category: 'web' as const,
+      url: '#',
+    },
+    {
+      id: 'barbershop-app',
+      title: 'Barbershop Booking App',
+      description: {
+        en: 'Full-featured Flutter app for barbershop reservations with multi-role system (Client, Employee, Manager). Features OAuth (Google, Apple, Guest), dynamic pricing by age group, walk-in appointment creation, real-time FCM notifications, employee dashboards, and business analytics for managers.',
+        es: 'App Flutter completa para reservas de barbería con sistema multi-rol (Cliente, Empleado, Manager). Incluye OAuth (Google, Apple, invitado), precios dinámicos por grupo de edad, citas walk-in, notificaciones FCM en tiempo real, panel para empleados y analíticas de negocio para managers.',
+      } as LocalizedString,
+      image: '/projects/barbershop-placeholder.svg',
+      placeholderGradient: 'from-pink-600 to-orange-400',
+      tags: ['Flutter', 'Dart', 'Firebase', 'FCM', 'Google OAuth', 'Clean Architecture', 'Provider'],
+      category: 'mobile' as const,
+      url: '#',
+    },
+    {
       id: 'loancore',
       title: 'LoanCore SaaS',
       description: {

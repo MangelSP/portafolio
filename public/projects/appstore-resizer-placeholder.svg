@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#g)"/>
+
+  <!-- Phone mockup center -->
+  <rect x="310" y="70" width="180" height="310" rx="22" fill="rgba(0,0,0,0.3)"/>
+  <rect x="322" y="84" width="156" height="282" rx="14" fill="rgba(255,255,255,0.12)"/>
+
+  <!-- Screen image placeholder -->
+  <rect x="334" y="100" width="132" height="90" rx="8" fill="rgba(255,255,255,0.2)"/>
+  <!-- Mountain icon inside -->
+  <polygon points="366,172 390,136 414,172" fill="rgba(255,255,255,0.4)"/>
+  <circle cx="403" cy="146" r="8" fill="rgba(255,255,255,0.5)"/>
+
+  <!-- Resize arrows around phone -->
+  <!-- Top-left arrow -->
+  <line x1="240" y1="140" x2="305" y2="140" stroke="rgba(255,255,255,0.6)" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="240,134 226,140 240,146" fill="rgba(255,255,255,0.6)"/>
+  <!-- Bottom-right arrow -->
+  <line x1="495" y1="310" x2="560" y2="310" stroke="rgba(255,255,255,0.6)" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="560,304 574,310 560,316" fill="rgba(255,255,255,0.6)"/>
+  <!-- Top-right arrow -->
+  <line x1="495" y1="140" x2="560" y2="140" stroke="rgba(255,255,255,0.6)" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="560,134 574,140 560,146" fill="rgba(255,255,255,0.6)"/>
+
+  <!-- Size labels -->
+  <rect x="170" y="230" width="110" height="30" rx="6" fill="rgba(0,0,0,0.25)"/>
+  <rect x="520" y="200" width="100" height="26" rx="6" fill="rgba(0,0,0,0.25)"/>
+  <rect x="520" y="238" width="80" height="26" rx="6" fill="rgba(0,0,0,0.2)"/>
+  <rect x="520" y="276" width="90" height="26" rx="6" fill="rgba(0,0,0,0.15)"/>
+
+  <!-- Bottom export button -->
+  <rect x="322" y="310" width="156" height="38" rx="10" fill="rgba(255,255,255,0.25)"/>
+</svg>

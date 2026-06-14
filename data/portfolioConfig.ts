@@ -84,6 +84,19 @@ export const config = {
       url: 'https://xplora-travel.net/trips',
     },
     {
+      id: 'domino-app',
+      title: 'Anotar Dominó - Capicúa',
+      description: {
+        en: 'Flutter app for iOS & Android to track dominó matches. Features AI-powered tile detection via camera (Gemini), team/individual modes, special plays (Capicúa), match history, AdMob integration and dark/light themes.',
+        es: 'App Flutter para iOS y Android para anotar partidas de dominó. Incluye detección de fichas por cámara con IA (Gemini), modos individual y parejas, jugadas especiales (Capicúa), historial, AdMob y temas oscuro/claro.',
+      } as LocalizedString,
+      image: '/projects/domino-placeholder.svg',
+      placeholderGradient: 'from-amber-500 to-orange-400',
+      tags: ['Flutter', 'Dart', 'Gemini AI', 'AdMob', 'Clean Architecture', 'Provider'],
+      category: 'mobile' as const,
+      url: '#',
+    },
+    {
       id: 'loancore',
       title: 'LoanCore SaaS',
       description: {

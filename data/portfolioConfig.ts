@@ -127,8 +127,8 @@ export const config = {
         en: 'Miguel delivered beyond expectations — clean code, on time, and great communication.',
         es: 'Miguel entregó más allá de las expectativas — código limpio, a tiempo y gran comunicación.',
       } as LocalizedString,
-      author: 'Cliente Ejemplo',
-      title: { en: 'CEO at Startup', es: 'CEO en Startup' } as LocalizedString,
+      author: 'Cliente',
+      title: { en: 'CEO at Company', es: 'CEO en Empresa' } as LocalizedString,
     },
   ],
 

@@ -102,10 +102,10 @@ export default function ExperienceGate({ onComplete }: { onComplete: () => void 
         transition={{ duration: 0.6 }}
       >
         <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight">
-          Randy Gonzalez
+          Miguel Angel
         </h1>
         <p className="text-gray-400 text-lg md:text-xl">
-          {l({ en: 'Full-Stack Software Engineer & Architect', es: 'Ingeniero de Software Full-Stack & Arquitecto' })}
+          {l({ en: 'Senior Full-Stack Engineer & Architect', es: 'Ingeniero Full-Stack Senior & Arquitecto' })}
         </p>
       </motion.div>
 

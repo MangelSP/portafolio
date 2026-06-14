@@ -10,8 +10,8 @@ const plusJakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-ja
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space' })
 
 export const metadata: Metadata = {
-  title: 'Randy Gonzalez — Full-Stack Engineer & Architect',
-  description: 'Portfolio of Randy Gonzalez, Full-Stack Software Engineer & Architect based in Dominican Republic.',
+  title: 'Miguel Angel Sanchez Peralta — Senior Full-Stack Engineer & Architect',
+  description: 'Portfolio of Miguel Angel Sanchez Peralta, Senior Full-Stack Software Engineer & Architect based in Dominican Republic.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

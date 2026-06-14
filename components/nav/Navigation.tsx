@@ -1,7 +1,7 @@
 // components/nav/Navigation.tsx
 'use client'
 
-import { Layers } from 'lucide-react'
+import { Layers, Sun, Moon } from 'lucide-react'
 import { useThemeStore } from '@/store/themeStore'
 import type { Locale } from '@/data/portfolioConfig'
 
@@ -20,7 +20,7 @@ const navLinks = [
 ]
 
 export default function Navigation() {
-  const { locale, setLocale, theme, openGate } = useThemeStore()
+  const { locale, setLocale, theme, darkMode, toggleDark, openGate } = useThemeStore()
   const labels = navLabels[locale]
 
   return (
@@ -46,6 +46,15 @@ export default function Navigation() {
         </div>
 
         <div className="flex items-center gap-2">
+          {/* Dark mode toggle */}
+          <button
+            onClick={toggleDark}
+            title={darkMode ? (locale === 'en' ? 'Light mode' : 'Modo claro') : (locale === 'en' ? 'Dark mode' : 'Modo oscuro')}
+            className="p-2 rounded-md text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--bg-secondary)] transition-colors"
+          >
+            {darkMode ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+          {/* Change theme */}
           <button
             onClick={openGate}
             title={locale === 'en' ? 'Change theme' : 'Cambiar tema'}

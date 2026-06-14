@@ -201,7 +201,7 @@ function HeroContent({
       <p className="text-xl md:text-2xl text-[var(--text-muted)] mb-4 font-medium">
         {titleEl}
       </p>
-      <p className="text-[var(--text-muted)] mb-8 max-w-xl leading-relaxed">
+      <p className="text-[var(--text-muted)] mb-8 max-w-xl leading-relaxed text-center mx-auto">
         {l(personalInfo.bio)}
       </p>
       <div className={`flex gap-4 mb-8 ${centered ? 'justify-center' : ''}`}>

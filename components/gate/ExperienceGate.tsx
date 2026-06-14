@@ -6,6 +6,31 @@ import { useThemeStore } from '@/store/themeStore'
 import { useEffect, useState } from 'react'
 import type { Theme, Locale } from '@/data/portfolioConfig'
 
+// ── Hot projects strip ──────────────────────────────────────────────────────
+const HOT_PROJECTS = [
+  {
+    id: 'travel-rd',
+    emoji: '✈️',
+    nameKey: { en: 'Travel-RD', es: 'Travel-RD' },
+    tagKey: { en: 'SaaS · Tourism · Flutter + NestJS', es: 'SaaS · Turismo · Flutter + NestJS' },
+    color: '#06b6d4',
+  },
+  {
+    id: 'loancore',
+    emoji: '💳',
+    nameKey: { en: 'LoanCore SaaS', es: 'LoanCore SaaS' },
+    tagKey: { en: 'Loans · Multi-tenant · .NET + Next.js', es: 'Préstamos · Multi-tenant · .NET + Next.js' },
+    color: '#7c3aed',
+  },
+  {
+    id: 'domino',
+    emoji: '🁣',
+    nameKey: { en: 'Anotar Dominó', es: 'Anotar Dominó' },
+    tagKey: { en: 'Mobile · Gemini AI · Flutter', es: 'Móvil · Gemini AI · Flutter' },
+    color: '#f59e0b',
+  },
+]
+
 // ── Floating tech particles ─────────────────────────────────────────────────
 const TECH_WORDS = [
   '.NET', 'React', 'Flutter', 'NestJS', 'Azure', 'Docker',
@@ -227,6 +252,49 @@ export default function ExperienceGate({ onComplete }: { onComplete: () => void 
           >
             <TypewriterSubtitle text={subtitle} />
           </motion.p>
+        </motion.div>
+
+        {/* Hot projects strip */}
+        <motion.div
+          className="w-full max-w-2xl mb-8 sm:mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.1, duration: 0.5 }}
+        >
+          <p className="text-center text-gray-600 text-xs uppercase tracking-[0.2em] mb-3">
+            {l({ en: '— featured projects —', es: '— proyectos destacados —' })}
+          </p>
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
+            {HOT_PROJECTS.map((p, i) => (
+              <motion.div
+                key={p.id}
+                className="relative rounded-xl border border-white/8 bg-white/4 px-3 py-3 sm:px-4 sm:py-3 overflow-hidden"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.2 + i * 0.08 }}
+              >
+                {/* color glow */}
+                <div
+                  className="absolute inset-0 opacity-10 pointer-events-none"
+                  style={{ background: `radial-gradient(ellipse 80% 80% at 50% 100%, ${p.color}, transparent)` }}
+                />
+                <div className="relative">
+                  <span className="text-xl sm:text-2xl block mb-1">{p.emoji}</span>
+                  <p className="text-white font-semibold text-xs sm:text-sm leading-tight mb-0.5">
+                    {l(p.nameKey)}
+                  </p>
+                  <p className="text-gray-500 text-[10px] sm:text-xs leading-tight hidden sm:block">
+                    {l(p.tagKey)}
+                  </p>
+                  {/* colored dot accent */}
+                  <span
+                    className="absolute top-0 right-0 w-1.5 h-1.5 rounded-full"
+                    style={{ background: p.color }}
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
         {/* CTA */}

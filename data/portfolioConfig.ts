@@ -16,7 +16,7 @@ export const config = {
       es: 'Construyo sistemas escalables e interfaces limpias. Enfocado en .NET, NestJS, Next.js y Flutter — desde decisiones de arquitectura hasta UIs pixel-perfect.',
     } as LocalizedString,
     location: 'República Dominicana',
-    avatar: '/avatar.png',
+    avatar: '/avatar.svg',
     contact: {
       email: 'tu@email.com',
       linkedin: 'https://linkedin.com/in/tu-perfil',

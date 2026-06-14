@@ -1,7 +1,7 @@
 // app/api/github/route.ts
 import { NextResponse } from 'next/server'
 
-const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME ?? 'mangeldevs'
+const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME ?? 'MangelSP'
 
 export async function GET() {
   const res = await fetch(`https://api.github.com/users/${username}`, {

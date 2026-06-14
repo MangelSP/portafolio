@@ -21,7 +21,7 @@ export const config = {
       email: 'yacalos_@hotmail.com',
       linkedin: 'https://www.linkedin.com/in/miguel-angel-sanchez-peralta-bb3941159/',
       instagram: 'https://www.instagram.com/mangeldevs/',
-      github: process.env.NEXT_PUBLIC_GITHUB_USERNAME ?? 'mangeldevs',
+      github: process.env.NEXT_PUBLIC_GITHUB_USERNAME ?? 'MangelSP',
       whatsapp: '+18295181341',
     },
   },

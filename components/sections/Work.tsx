@@ -2,8 +2,9 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
-import { ExternalLink } from 'lucide-react'
+import { ExternalLink, ArrowRight } from 'lucide-react'
 import { useThemeStore } from '@/store/themeStore'
 import { useL } from '@/lib/usePortfolioLocale'
 import { config } from '@/data/portfolioConfig'
@@ -21,6 +22,43 @@ const filters: { key: Category; label: { en: string; es: string } }[] = [
 function ProjectPlaceholder({ gradient }: { gradient: string }) {
   return (
     <div className={`w-full h-40 rounded-xl bg-gradient-to-br ${gradient} opacity-80`} />
+  )
+}
+
+function ProjectLinks({
+  project,
+  l,
+  variant,
+}: {
+  project: { id: string; url: string }
+  l: (s: { en: string; es: string }) => string
+  variant: 'modern' | 'corporate' | 'dynamic'
+}) {
+  const detailLabel = l({ en: 'View Details', es: 'Ver Detalles' })
+  const externalLabel = l({ en: 'Live', es: 'Demo' })
+  const dynamicColor = 'text-purple-400 hover:text-cyan-400'
+  const defaultColor = 'text-[var(--accent)] hover:underline'
+
+  return (
+    <div className="flex items-center gap-4 flex-wrap">
+      <Link
+        href={`/projects/${project.id}`}
+        className={`text-sm font-medium transition-colors inline-flex items-center gap-1
+          ${variant === 'dynamic' ? dynamicColor : defaultColor}`}
+      >
+        {detailLabel} <ArrowRight size={14} />
+      </Link>
+      {project.url && project.url !== '#' && (
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors inline-flex items-center gap-1"
+        >
+          {externalLabel} <ExternalLink size={13} />
+        </a>
+      )}
+    </div>
   )
 }
 
@@ -106,9 +144,7 @@ export default function Work() {
                 <h3 className="font-bold text-[var(--text)] mt-4 mb-2">{project.title}</h3>
                 <p className="text-[var(--text-muted)] text-sm mb-4">{l(project.description)}</p>
                 <div className="flex flex-wrap gap-2 mb-4">{project.tags.map((t) => <Tag key={t} label={t} />)}</div>
-                <a href={project.url} className="text-sm font-medium text-[var(--accent)] hover:underline inline-flex items-center gap-1">
-                  {l({ en: 'View Project', es: 'Ver Proyecto' })} <ExternalLink size={14} />
-                </a>
+                <ProjectLinks project={project} l={l} variant="modern" />
               </motion.div>
             ))}
           </div>
@@ -133,9 +169,7 @@ export default function Work() {
                   <h3 className="font-bold text-[var(--text)] mb-2">{project.title}</h3>
                   <p className="text-[var(--text-muted)] text-sm mb-4">{l(project.description)}</p>
                   <div className="flex flex-wrap gap-2 mb-3">{project.tags.map((t) => <Tag key={t} label={t} />)}</div>
-                  <a href={project.url} className="text-sm font-medium text-[var(--accent)] hover:underline inline-flex items-center gap-1">
-                    {l({ en: 'View Project', es: 'Ver Proyecto' })} <ExternalLink size={14} />
-                  </a>
+                  <ProjectLinks project={project} l={l} variant="corporate" />
                 </div>
               </motion.div>
             ))}
@@ -158,9 +192,7 @@ export default function Work() {
                   <h3 className="font-bold text-[var(--text)] mt-4 mb-2">{project.title}</h3>
                   <p className="text-[var(--text-muted)] text-sm mb-4">{l(project.description)}</p>
                   <div className="flex flex-wrap gap-2 mb-4">{project.tags.map((t) => <Tag key={t} label={t} />)}</div>
-                  <a href={project.url} className="text-sm font-medium text-purple-400 hover:text-cyan-400 transition-colors inline-flex items-center gap-1">
-                    {l({ en: 'View Project', es: 'Ver Proyecto' })} <ExternalLink size={14} />
-                  </a>
+                  <ProjectLinks project={project} l={l} variant="dynamic" />
                 </TiltCard>
               </motion.div>
             ))}

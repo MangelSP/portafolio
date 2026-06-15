@@ -2,7 +2,7 @@
 'use client'
 
 import Image from 'next/image'
-import { motion, useAnimation } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { GitFork, Globe, Mail, MessageCircle } from 'lucide-react'
 import { useThemeStore } from '@/store/themeStore'
@@ -82,7 +82,19 @@ function CoinAvatar({ theme }: { theme: string | null }) {
             transform: 'rotateY(180deg)',
           }}
         >
-          <Image src="/foto-perfil.jpg" alt="Miguel Angel" fill className="object-cover" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/foto-perfil.jpg"
+            alt="Miguel Angel"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center top',
+              display: 'block',
+              transform: 'scaleX(-1)',
+            }}
+          />
         </div>
       </motion.div>
 

@@ -69,7 +69,7 @@ export default function Navigation() {
                 onClick={() => setLocale(loc)}
                 className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${
                   locale === loc
-                    ? 'bg-[var(--accent)] text-white'
+                    ? 'bg-[var(--accent)] text-[var(--bg)]'
                     : 'text-[var(--text-muted)] hover:text-[var(--text)]'
                 }`}
               >

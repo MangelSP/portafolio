@@ -10,7 +10,7 @@ interface ButtonProps {
 export default function Button({ children, onClick, href, variant = 'primary', className = '' }: ButtonProps) {
   const base = 'inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 cursor-pointer'
   const variants = {
-    primary: 'bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)]',
+    primary: 'bg-[var(--accent)] text-[var(--bg)] hover:bg-[var(--accent-hover)]',
     outline: 'border border-[var(--border)] text-[var(--text)] hover:bg-[var(--bg-secondary)]',
   }
 

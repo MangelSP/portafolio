@@ -25,8 +25,20 @@ const graphThemeMap: Record<string, string> = {
   dynamic: 'tokyo-night',
 }
 
+const statsThemeDarkMap: Record<string, string> = {
+  modern: 'dark',
+  corporate: 'github_dark',
+  dynamic: 'tokyonight',
+}
+
+const graphThemeDarkMap: Record<string, string> = {
+  modern: 'github-dark',
+  corporate: 'github-dark',
+  dynamic: 'tokyo-night',
+}
+
 export default function GitHubStats() {
-  const { theme } = useThemeStore()
+  const { theme, darkMode } = useThemeStore()
   const l = useL()
   const [data, setData] = useState<GitHubData | null>(null)
   const username = config.personalInfo.contact.github
@@ -38,16 +50,22 @@ export default function GitHubStats() {
       .catch(() => null)
   }, [])
 
-  const statsTheme = statsThemeMap[theme ?? 'modern']
-  const graphTheme = graphThemeMap[theme ?? 'modern']
+  const t = theme ?? 'modern'
+  const statsTheme = darkMode ? statsThemeDarkMap[t] : statsThemeMap[t]
+  const graphTheme = darkMode ? graphThemeDarkMap[t] : graphThemeMap[t]
 
-  // bg_color for embedded images — matches each theme's --bg (without #)
+  // bg_color for embedded images — transparent on dark themes
   const bgColorMap: Record<string, string> = {
     modern: 'ffffff',
     corporate: 'f8f9fa',
     dynamic: '00000000',
   }
-  const bgColor = bgColorMap[theme ?? 'modern']
+  const bgColorDarkMap: Record<string, string> = {
+    modern: '0f0f0f',
+    corporate: '0d1117',
+    dynamic: '00000000',
+  }
+  const bgColor = darkMode ? bgColorDarkMap[t] : bgColorMap[t]
 
   return (
     <section id="github" className="py-24 bg-[var(--bg)]">

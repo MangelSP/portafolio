@@ -11,7 +11,7 @@ const HOT_PROJECTS = [
   {
     id: 'travel-rd',
     emoji: '✈️',
-    nameKey: { en: 'Travel-RD', es: 'Travel-RD' },
+    nameKey: { en: 'Xplora Travel', es: 'Xplora Travel' },
     tagKey: { en: 'SaaS · Tourism · Flutter + NestJS', es: 'SaaS · Turismo · Flutter + NestJS' },
     color: '#06b6d4',
   },

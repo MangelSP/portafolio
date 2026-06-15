@@ -2,9 +2,9 @@
 'use client'
 
 import Image from 'next/image'
-import { motion, useAnimation } from 'framer-motion'
-import { useState } from 'react'
-import { GitFork, Globe, Mail, MessageCircle } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useRef, useEffect } from 'react'
+import { GitFork, Globe, Mail, MessageCircle, Download, ChevronDown } from 'lucide-react'
 import { useThemeStore } from '@/store/themeStore'
 import { useL } from '@/lib/usePortfolioLocale'
 import { config } from '@/data/portfolioConfig'
@@ -82,7 +82,19 @@ function CoinAvatar({ theme }: { theme: string | null }) {
             transform: 'rotateY(180deg)',
           }}
         >
-          <Image src="/foto-perfil.jpg" alt="Miguel Angel" fill className="object-cover" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/foto-perfil.jpg"
+            alt="Miguel Angel"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center top',
+              display: 'block',
+              transform: 'scaleX(-1)',
+            }}
+          />
         </div>
       </motion.div>
 
@@ -171,6 +183,70 @@ export default function Hero() {
   )
 }
 
+function CVDownloadButton({ l }: { l: (s: { en: string; es: string }) => string }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-[var(--border)] bg-[var(--bg-secondary)] text-[var(--text)] text-sm font-medium hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors"
+      >
+        <Download size={15} />
+        {l({ en: 'Download CV', es: 'Descargar CV' })}
+        <ChevronDown size={14} className={`transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -6, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -6, scale: 0.97 }}
+            transition={{ duration: 0.15 }}
+            className="absolute left-0 top-full mt-2 w-56 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] shadow-xl z-50 overflow-hidden"
+          >
+            <a
+              href="/Miguel Angel Sanchez Peralta Resume.docx"
+              download
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-3 px-4 py-3 text-sm text-[var(--text)] hover:bg-[var(--bg-secondary)] transition-colors"
+            >
+              <span className="text-lg">🇺🇸</span>
+              <div>
+                <p className="font-medium">Resume</p>
+                <p className="text-xs text-[var(--text-muted)]">English · .docx</p>
+              </div>
+            </a>
+            <div className="h-px bg-[var(--border)]" />
+            <a
+              href="/Miguel Angel Sanchez Peralta CV.docx"
+              download
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-3 px-4 py-3 text-sm text-[var(--text)] hover:bg-[var(--bg-secondary)] transition-colors"
+            >
+              <span className="text-lg">🇪🇸</span>
+              <div>
+                <p className="font-medium">Currículum</p>
+                <p className="text-xs text-[var(--text-muted)]">Español · .docx</p>
+              </div>
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
 function HeroContent({
   socialLinks,
   titleEl,
@@ -204,13 +280,14 @@ function HeroContent({
       <p className="text-[var(--text-muted)] mb-8 max-w-xl leading-relaxed text-center mx-auto">
         {l(personalInfo.bio)}
       </p>
-      <div className={`flex gap-4 mb-8 ${centered ? 'justify-center' : ''}`}>
+      <div className={`flex flex-wrap gap-4 mb-8 ${centered ? 'justify-center' : ''}`}>
         <Button href="#work" variant="primary">
           {l({ en: 'View Work', es: 'Ver Proyectos' })}
         </Button>
         <Button href="#contact" variant="outline">
           {l({ en: 'Contact Me', es: 'Contáctame' })}
         </Button>
+        <CVDownloadButton l={l} />
       </div>
       <div className={`flex gap-4 ${centered ? 'justify-center' : ''}`}>
         {socialLinks.map(({ icon: Icon, href, label }) => (

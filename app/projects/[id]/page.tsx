@@ -2,18 +2,113 @@
 'use client'
 
 import { notFound } from 'next/navigation'
-import { use } from 'react'
+import { use, useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { ArrowLeft, ExternalLink, GitFork } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowLeft, ExternalLink, GitFork, X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react'
 import { config } from '@/data/portfolioConfig'
 import { useL } from '@/lib/usePortfolioLocale'
 import Tag from '@/components/ui/Tag'
+
+function Lightbox({
+  images,
+  index,
+  onClose,
+  isMobile,
+}: {
+  images: string[]
+  index: number
+  onClose: () => void
+  isMobile: boolean
+}) {
+  const [current, setCurrent] = useState(index)
+
+  const prev = useCallback(() => setCurrent((c) => (c - 1 + images.length) % images.length), [images.length])
+  const next = useCallback(() => setCurrent((c) => (c + 1) % images.length), [images.length])
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+      if (e.key === 'ArrowLeft') prev()
+      if (e.key === 'ArrowRight') next()
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [onClose, prev, next])
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      {/* Close */}
+      <button
+        className="absolute top-4 right-4 text-white/70 hover:text-white bg-white/10 rounded-full p-2 transition-colors z-10"
+        onClick={onClose}
+      >
+        <X size={20} />
+      </button>
+
+      {/* Counter */}
+      <span className="absolute top-4 left-1/2 -translate-x-1/2 text-white/50 text-sm tabular-nums">
+        {current + 1} / {images.length}
+      </span>
+
+      {/* Prev */}
+      <button
+        className="absolute left-3 sm:left-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-2 sm:p-3 transition-colors z-10"
+        onClick={(e) => { e.stopPropagation(); prev() }}
+      >
+        <ChevronLeft size={24} />
+      </button>
+
+      {/* Image */}
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={current}
+          src={images[current]}
+          alt={`Screenshot ${current + 1}`}
+          className={`max-h-[88vh] rounded-xl shadow-2xl object-contain ${isMobile ? 'max-w-[260px] sm:max-w-[320px]' : 'max-w-[90vw] sm:max-w-4xl'}`}
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.96 }}
+          transition={{ duration: 0.18 }}
+          onClick={(e) => e.stopPropagation()}
+        />
+      </AnimatePresence>
+
+      {/* Next */}
+      <button
+        className="absolute right-3 sm:right-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-2 sm:p-3 transition-colors z-10"
+        onClick={(e) => { e.stopPropagation(); next() }}
+      >
+        <ChevronRight size={24} />
+      </button>
+
+      {/* Thumbnails strip */}
+      <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5 px-4 overflow-x-auto">
+        {images.map((src, i) => (
+          <button
+            key={i}
+            onClick={(e) => { e.stopPropagation(); setCurrent(i) }}
+            className={`flex-shrink-0 w-10 h-10 rounded-lg overflow-hidden border-2 transition-all ${i === current ? 'border-white scale-110' : 'border-white/20 opacity-50 hover:opacity-80'}`}
+          >
+            <img src={src} alt="" className="w-full h-full object-cover" />
+          </button>
+        ))}
+      </div>
+    </motion.div>
+  )
+}
 
 export default function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
   const project = config.projects.find((p) => p.id === id)
   const l = useL()
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   if (!project) notFound()
 
@@ -201,14 +296,43 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
           </div>
         </motion.section>
 
-        {/* Screenshots placeholder — ready for real images */}
-        {project.screenshots.length === 0 && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <SectionLabel label={l({ en: 'Screenshots', es: 'Capturas de Pantalla' })} />
+        {/* Screenshots gallery */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <SectionLabel label={l({ en: 'Gallery', es: 'Galería' })} />
+          {project.screenshots.length > 0 ? (
+            <>
+              <div className={`grid gap-3 ${project.category === 'mobile' ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
+                {project.screenshots.map((src, i) => (
+                  <motion.button
+                    key={i}
+                    className={`group relative overflow-hidden rounded-xl bg-[var(--card-bg)] border border-[var(--card-border)] hover:border-[var(--accent)] transition-colors cursor-zoom-in ${project.category === 'mobile' ? 'aspect-[9/19]' : 'aspect-video'}`}
+                    onClick={() => setLightboxIndex(i)}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: Math.min(i * 0.04, 0.4) }}
+                  >
+                    <img
+                      src={src}
+                      alt={`${project.title} screenshot ${i + 1}`}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                      <ZoomIn size={22} className="text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow" />
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+              <p className="text-xs text-[var(--text-muted)] mt-3 text-center">
+                {project.screenshots.length} {l({ en: 'screenshots — click to expand', es: 'capturas — clic para ampliar' })}
+              </p>
+            </>
+          ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[1, 2, 3].map((n) => (
                 <div
@@ -219,8 +343,20 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                 </div>
               ))}
             </div>
-          </motion.section>
-        )}
+          )}
+        </motion.section>
+
+        {/* Lightbox */}
+        <AnimatePresence>
+          {lightboxIndex !== null && (
+            <Lightbox
+              images={project.screenshots}
+              index={lightboxIndex}
+              onClose={() => setLightboxIndex(null)}
+              isMobile={project.category === 'mobile'}
+            />
+          )}
+        </AnimatePresence>
 
         {/* Prev / Next navigation */}
         <motion.div

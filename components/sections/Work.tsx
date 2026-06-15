@@ -1,7 +1,7 @@
 // components/sections/Work.tsx
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 import { ExternalLink, ArrowRight } from 'lucide-react'
@@ -22,6 +22,74 @@ const filters: { key: Category; label: { en: string; es: string } }[] = [
 function ProjectPlaceholder({ gradient }: { gradient: string }) {
   return (
     <div className={`w-full h-40 rounded-xl bg-gradient-to-br ${gradient} opacity-80`} />
+  )
+}
+
+const COLLAGE_ROTATIONS = [-6, 3, -2, 5, -4, 2]
+
+function ProjectImageCollage({
+  screenshots,
+  gradient,
+  title,
+  isMobile,
+}: {
+  screenshots: string[]
+  gradient: string
+  title: string
+  isMobile: boolean
+}) {
+  const [activeIdx, setActiveIdx] = useState(0)
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  useEffect(() => {
+    if (screenshots.length < 2) return
+    intervalRef.current = setInterval(() => {
+      setActiveIdx((prev) => (prev + 1) % screenshots.length)
+    }, 2200 + Math.random() * 800)
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+    }
+  }, [screenshots.length])
+
+  if (screenshots.length === 0) {
+    return <ProjectPlaceholder gradient={gradient} />
+  }
+
+  const visible = screenshots.slice(0, Math.min(4, screenshots.length))
+
+  return (
+    <div className={`w-full relative flex items-center justify-center overflow-hidden rounded-xl ${isMobile ? 'h-52' : 'h-40'}`}>
+      <div className="relative w-full h-full">
+        {visible.map((src, i) => {
+          const isActive = i === activeIdx % visible.length
+          const rot = COLLAGE_ROTATIONS[i % COLLAGE_ROTATIONS.length]
+          const zIndex = isActive ? 10 : visible.length - i
+
+          return (
+            <motion.div
+              key={src}
+              className={`absolute inset-0 rounded-xl overflow-hidden shadow-lg border-2 border-white/10
+                ${isMobile ? 'w-[55%] left-1/2 -translate-x-1/2' : 'w-full'}`}
+              style={{ zIndex }}
+              animate={{
+                rotate: isActive ? 0 : rot,
+                scale: isActive ? 1 : 0.93 - i * 0.02,
+                opacity: isActive ? 1 : 0.55 - i * 0.08,
+                y: isActive ? 0 : i * 3,
+              }}
+              transition={{ type: 'spring', stiffness: 260, damping: 26 }}
+            >
+              <img
+                src={src}
+                alt={`${title} screenshot`}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </motion.div>
+          )
+        })}
+      </div>
+    </div>
   )
 }
 
@@ -140,7 +208,12 @@ export default function Work() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <ProjectPlaceholder gradient={project.placeholderGradient} />
+                <ProjectImageCollage
+                  screenshots={project.screenshots}
+                  gradient={project.placeholderGradient}
+                  title={project.title}
+                  isMobile={project.category === 'mobile'}
+                />
                 <h3 className="font-bold text-[var(--text)] mt-4 mb-2">{project.title}</h3>
                 <p className="text-[var(--text-muted)] text-sm mb-4">{l(project.description)}</p>
                 <div className="flex flex-wrap gap-2 mb-4">{project.tags.map((t) => <Tag key={t} label={t} />)}</div>
@@ -163,7 +236,12 @@ export default function Work() {
                 transition={{ delay: i * 0.1 }}
               >
                 <div className="w-40 flex-shrink-0">
-                  <ProjectPlaceholder gradient={project.placeholderGradient} />
+                  <ProjectImageCollage
+                    screenshots={project.screenshots}
+                    gradient={project.placeholderGradient}
+                    title={project.title}
+                    isMobile={project.category === 'mobile'}
+                  />
                 </div>
                 <div className="flex-1">
                   <h3 className="font-bold text-[var(--text)] mb-2">{project.title}</h3>
@@ -188,7 +266,12 @@ export default function Work() {
                 transition={{ delay: i * 0.15 }}
               >
                 <TiltCard>
-                  <ProjectPlaceholder gradient={project.placeholderGradient} />
+                  <ProjectImageCollage
+                    screenshots={project.screenshots}
+                    gradient={project.placeholderGradient}
+                    title={project.title}
+                    isMobile={project.category === 'mobile'}
+                  />
                   <h3 className="font-bold text-[var(--text)] mt-4 mb-2">{project.title}</h3>
                   <p className="text-[var(--text-muted)] text-sm mb-4">{l(project.description)}</p>
                   <div className="flex flex-wrap gap-2 mb-4">{project.tags.map((t) => <Tag key={t} label={t} />)}</div>

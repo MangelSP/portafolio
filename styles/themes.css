@@ -1,12 +1,8 @@
 /* Font mapping per theme */
-[data-theme='modern'] {
-  font-family: var(--font-jakarta), sans-serif;
-}
-[data-theme='corporate'] {
-  font-family: var(--font-inter), sans-serif;
-}
+[data-theme='modern'],
+[data-theme='corporate'],
 [data-theme='dynamic'] {
-  font-family: var(--font-space), sans-serif;
+  font-family: var(--font-montserrat), sans-serif;
 }
 
 /* ── MODERN LIGHT ────────────────────────────────────── */

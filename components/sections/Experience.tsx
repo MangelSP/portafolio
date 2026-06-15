@@ -43,7 +43,7 @@ export default function Experience() {
               >
                 {/* Dot */}
                 <div className="absolute left-0 top-1 w-8 h-8 rounded-full bg-[var(--accent)] flex items-center justify-center">
-                  <div className="w-3 h-3 rounded-full bg-white" />
+                  <div className="w-3 h-3 rounded-full bg-[var(--bg)]" />
                 </div>
 
                 <div className="rounded-2xl border bg-[var(--card-bg)] border-[var(--card-border)] p-6">

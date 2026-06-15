@@ -43,7 +43,8 @@ export default function Expertise() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
                 <Card>
-                  <div className="w-10 h-10 rounded-lg bg-[var(--accent)] bg-opacity-10 flex items-center justify-center mb-4">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 border border-[var(--border)]"
+                    style={{ backgroundColor: 'color-mix(in srgb, var(--accent) 12%, transparent)' }}>
                     <Icon size={20} className="text-[var(--accent)]" />
                   </div>
                   <h3 className="font-bold text-[var(--text)] mb-2">{l(area.category)}</h3>

@@ -96,6 +96,11 @@
 }
 
 /* ── Transition for smooth dark/light switch ─────────── */
-*, *::before, *::after {
-  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.15s ease;
+/* Exclude elements that Framer Motion animates to avoid conflicts */
+*:not([style*="transform"]):not([style*="opacity"]),
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
 }

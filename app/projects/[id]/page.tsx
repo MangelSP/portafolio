@@ -112,16 +112,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
 
   if (!project) notFound()
 
-  const gradientMap: Record<string, string> = {
-    'travel-rd': 'from-blue-600 via-cyan-500 to-teal-400',
-    'travel-rd-mobile': 'from-cyan-600 via-teal-500 to-emerald-400',
-    'domino-app': 'from-amber-600 via-orange-500 to-red-400',
-    'appstore-resizer': 'from-sky-600 via-blue-500 to-green-400',
-    'gestor-citas': 'from-emerald-700 via-green-500 to-teal-400',
-    'barbershop-app': 'from-pink-700 via-rose-500 to-orange-400',
-    'loancore': 'from-violet-700 via-purple-500 to-indigo-400',
-  }
-  const heroGradient = gradientMap[project.id] ?? 'from-gray-700 via-gray-500 to-gray-400'
+  const heroGradient = project.heroGradient
 
   // adjacent projects for prev/next navigation
   const projects = config.projects

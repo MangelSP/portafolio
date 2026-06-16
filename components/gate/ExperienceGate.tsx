@@ -5,30 +5,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useThemeStore } from '@/store/themeStore'
 import { useEffect, useState } from 'react'
 import type { Theme, Locale } from '@/data/portfolioConfig'
+import { config } from '@/data/portfolioConfig'
 
 // ── Hot projects strip ──────────────────────────────────────────────────────
 const HOT_PROJECTS = [
-  {
-    id: 'travel-rd',
-    emoji: '✈️',
-    nameKey: { en: 'Xplora Travel', es: 'Xplora Travel' },
-    tagKey: { en: 'SaaS · Tourism · Flutter + NestJS', es: 'SaaS · Turismo · Flutter + NestJS' },
-    color: '#06b6d4',
-  },
-  {
-    id: 'loancore',
-    emoji: '💳',
-    nameKey: { en: 'LoanCore SaaS', es: 'LoanCore SaaS' },
-    tagKey: { en: 'Loans · Multi-tenant · .NET + Next.js', es: 'Préstamos · Multi-tenant · .NET + Next.js' },
-    color: '#7c3aed',
-  },
-  {
-    id: 'domino',
-    emoji: '🁣',
-    nameKey: { en: 'Anotar Dominó', es: 'Anotar Dominó' },
-    tagKey: { en: 'Mobile · Gemini AI · Flutter', es: 'Móvil · Gemini AI · Flutter' },
-    color: '#f59e0b',
-  },
+  { id: 'travel-rd',   emoji: '✈️', tagKey: { en: 'SaaS · Tourism · Flutter + NestJS', es: 'SaaS · Turismo · Flutter + NestJS' }, color: '#06b6d4' },
+  { id: 'loancore',   emoji: '💳', tagKey: { en: 'Loans · Multi-tenant · .NET + Next.js', es: 'Préstamos · Multi-tenant · .NET + Next.js' }, color: '#8b5cf6' },
+  { id: 'domino-app', emoji: '🁣', tagKey: { en: 'Mobile · Flutter · AdMob', es: 'Móvil · Flutter · AdMob' }, color: '#f59e0b' },
 ]
 
 // ── Floating tech particles ─────────────────────────────────────────────────
@@ -173,13 +156,12 @@ function TypewriterSubtitle({ text }: { text: string }) {
 }
 
 // ── Main gate ───────────────────────────────────────────────────────────────
-export default function ExperienceGate({ onComplete }: { onComplete: () => void }) {
+export default function ExperienceGate() {
   const { setTheme, locale, setLocale } = useThemeStore()
   const [hoveredId, setHoveredId] = useState<Theme | null>(null)
 
   const handleChoose = (theme: Theme) => {
     setTheme(theme)
-    onComplete()
   }
 
   const l = (obj: { en: string; es: string }) => obj[locale]
@@ -195,10 +177,10 @@ export default function ExperienceGate({ onComplete }: { onComplete: () => void 
       exit={{ opacity: 0, scale: 0.98 }}
       transition={{ duration: 0.5 }}
     >
-      <GridBackground />
+<GridBackground />
 
       {/* Locale toggle — top right */}
-      <div className="absolute top-4 right-4 flex gap-2 z-10">
+      <div className="absolute top-4 right-4 flex gap-2 z-20">
         {(['en', 'es'] as Locale[]).map((loc) => (
           <button
             key={loc}
@@ -281,7 +263,7 @@ export default function ExperienceGate({ onComplete }: { onComplete: () => void 
                 <div className="relative">
                   <span className="text-xl sm:text-2xl block mb-1">{p.emoji}</span>
                   <p className="text-white font-semibold text-xs sm:text-sm leading-tight mb-0.5">
-                    {l(p.nameKey)}
+                    {config.projects.find((pr) => pr.id === p.id)?.title}
                   </p>
                   <p className="text-gray-500 text-[10px] sm:text-xs leading-tight hidden sm:block">
                     {l(p.tagKey)}

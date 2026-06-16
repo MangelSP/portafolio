@@ -19,7 +19,7 @@ export default function Home() {
     <main className="bg-[var(--bg)] min-h-screen text-[var(--text)] transition-colors duration-300">
       <AnimatePresence>
         {gateOpen && (
-          <ExperienceGate onComplete={() => {}} />
+          <ExperienceGate />
         )}
       </AnimatePresence>
 

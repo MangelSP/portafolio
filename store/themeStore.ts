@@ -32,7 +32,6 @@ export const useThemeStore = create<ThemeStore>((set, get) => ({
 
   setTheme: (theme) => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('preferred-theme', theme)
       document.documentElement.setAttribute('data-theme', theme)
     }
     set({ theme, hasChosenTheme: true, gateOpen: false })
@@ -60,15 +59,9 @@ export const useThemeStore = create<ThemeStore>((set, get) => ({
 
   initFromStorage: () => {
     if (typeof window === 'undefined') return
-    const savedTheme = localStorage.getItem('preferred-theme') as Theme | null
     const savedLocale = (localStorage.getItem('preferred-locale') as Locale) ?? 'en'
     const savedDark = localStorage.getItem('preferred-dark') === 'true'
     applyDark(savedDark)
-    if (savedTheme) {
-      document.documentElement.setAttribute('data-theme', savedTheme)
-      set({ theme: savedTheme, locale: savedLocale, darkMode: savedDark, hasChosenTheme: true, gateOpen: false })
-    } else {
-      set({ locale: savedLocale, darkMode: savedDark })
-    }
+    set({ locale: savedLocale, darkMode: savedDark })
   },
 }))

@@ -9,25 +9,19 @@ import { useThemeStore } from '@/store/themeStore'
 import { useL } from '@/lib/usePortfolioLocale'
 import { config } from '@/data/portfolioConfig'
 import Button from '@/components/ui/Button'
-
 function TypewriterText({ text }: { text: string }) {
-  return (
-    <motion.span
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-    >
-      {text.split('').map((char, i) => (
-        <motion.span
-          key={i}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: i * 0.04 }}
-        >
-          {char}
-        </motion.span>
-      ))}
-    </motion.span>
-  )
+  const [displayed, setDisplayed] = useState('')
+  useEffect(() => {
+    setDisplayed('')
+    let i = 0
+    const id = setInterval(() => {
+      i++
+      setDisplayed(text.slice(0, i))
+      if (i >= text.length) clearInterval(id)
+    }, 40)
+    return () => clearInterval(id)
+  }, [text])
+  return <span>{displayed}</span>
 }
 
 function CoinAvatar({ theme }: { theme: string | null }) {
@@ -123,12 +117,6 @@ export default function Hero() {
     { icon: MessageCircle, href: `https://wa.me/${personalInfo.contact.whatsapp.replace(/\D/g, '')}`, label: 'WhatsApp' },
   ]
 
-  const avatarEl = (
-    <div className="relative">
-      <CoinAvatar theme={theme} />
-    </div>
-  )
-
   const titleEl = theme === 'dynamic'
     ? <TypewriterText text={l(personalInfo.title)} />
     : l(personalInfo.title)
@@ -136,14 +124,14 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-screen pt-24 pb-16 flex items-center bg-[var(--bg)]"
+      className="relative overflow-hidden min-h-screen pt-24 pb-16 flex items-center bg-[var(--bg)]"
     >
-      <div className="max-w-6xl mx-auto px-6 w-full">
+<div className="max-w-6xl mx-auto px-6 w-full">
         {/* MODERN: 2-column layout */}
         {theme === 'modern' && (
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-              {avatarEl}
+              <CoinAvatar theme={theme} />
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
               <HeroContent socialLinks={socialLinks} titleEl={titleEl} l={l} />
@@ -154,7 +142,7 @@ export default function Hero() {
         {/* CORPORATE: centered with metrics */}
         {theme === 'corporate' && (
           <motion.div className="text-center max-w-3xl mx-auto" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            <div className="flex justify-center mb-8">{avatarEl}</div>
+            <div className="flex justify-center mb-8"><CoinAvatar theme={theme} /></div>
             <HeroContent socialLinks={socialLinks} titleEl={titleEl} l={l} centered />
             <div className="grid grid-cols-3 gap-8 mt-12 pt-12 border-t border-[var(--border)]">
               {[
@@ -173,8 +161,8 @@ export default function Hero() {
 
         {/* DYNAMIC: bold centered */}
         {theme === 'dynamic' && (
-          <motion.div className="text-center max-w-4xl mx-auto" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-            <div className="flex justify-center mb-8">{avatarEl}</div>
+          <motion.div className="relative z-10 text-center max-w-4xl mx-auto" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+            <div className="flex justify-center mb-8"><CoinAvatar theme={theme} /></div>
             <HeroContent socialLinks={socialLinks} titleEl={titleEl} l={l} centered gradient />
           </motion.div>
         )}

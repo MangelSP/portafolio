@@ -1,10 +1,3 @@
-/* Font mapping per theme */
-[data-theme='modern'],
-[data-theme='corporate'],
-[data-theme='dynamic'] {
-  font-family: var(--font-montserrat), sans-serif;
-}
-
 /* ── MODERN LIGHT ────────────────────────────────────── */
 [data-theme='modern'] {
   --bg: #ffffff;
@@ -67,9 +60,9 @@
   --bg-secondary: #1a1a2e;
   --text: #ffffff;
   --text-muted: #94a3b8;
-  --accent: #7c3aed;
-  --accent-secondary: #06b6d4;
-  --accent-hover: #6d28d9;
+  --accent: #8b5cf6;
+  --accent-secondary: #22d3ee;
+  --accent-hover: #7c3aed;
   --border: #2d2d4e;
   --card-bg: #1a1a2e;
   --card-border: #2d2d4e;
@@ -82,9 +75,9 @@
   --bg-secondary: #0d0d1f;
   --text: #ffffff;
   --text-muted: #7c8ba5;
-  --accent: #9d5cf5;
+  --accent: #a78bfa;
   --accent-secondary: #22d3ee;
-  --accent-hover: #8b3cf7;
+  --accent-hover: #8b5cf6;
   --border: #1a1a30;
   --card-bg: #0d0d1f;
   --card-border: #1a1a30;

@@ -11,6 +11,7 @@ export interface ProjectDetail {
   longDescription: LocalizedString
   image: string
   placeholderGradient: string
+  heroGradient: string
   tags: readonly string[]
   category: 'web' | 'mobile' | 'architecture'
   url: string
@@ -88,6 +89,7 @@ export const config = {
       } as LocalizedString,
       image: '/projects/travel-rd-placeholder.svg',
       placeholderGradient: 'from-blue-500 to-cyan-400',
+      heroGradient: 'from-blue-600 via-cyan-500 to-teal-400',
       tags: ['NestJS', 'Next.js', 'Flutter', 'PostgreSQL', 'Stripe', 'Firebase', 'Redis', 'BullMQ'],
       category: 'web' as const,
       url: 'https://xplora-travel.net/trips',
@@ -199,6 +201,7 @@ export const config = {
       } as LocalizedString,
       image: '/projects/travel-rd-mobile-placeholder.svg',
       placeholderGradient: 'from-cyan-500 to-teal-400',
+      heroGradient: 'from-cyan-600 via-teal-500 to-emerald-400',
       tags: ['Flutter', 'Dart', 'Riverpod', 'Clean Architecture', 'Firebase', 'OpenStreetMap'],
       category: 'mobile' as const,
       url: 'https://xplora-travel.net/trips',
@@ -298,6 +301,7 @@ export const config = {
       } as LocalizedString,
       image: '/projects/domino-placeholder.svg',
       placeholderGradient: 'from-amber-500 to-orange-400',
+      heroGradient: 'from-amber-600 via-orange-500 to-red-400',
       tags: ['Flutter', 'Dart', 'AdMob', 'Clean Architecture', 'Provider'],
       category: 'mobile' as const,
       url: '#',
@@ -361,6 +365,7 @@ export const config = {
       } as LocalizedString,
       image: '/projects/appstore-resizer-placeholder.svg',
       placeholderGradient: 'from-sky-500 to-green-400',
+      heroGradient: 'from-sky-600 via-blue-500 to-green-400',
       tags: ['Next.js', 'TypeScript', 'Canvas API', 'JSZip', 'Tailwind CSS', 'Vercel'],
       category: 'web' as const,
       url: 'https://app-store-resizer.vercel.app/',
@@ -421,6 +426,7 @@ export const config = {
       } as LocalizedString,
       image: '/projects/gestor-citas-placeholder.svg',
       placeholderGradient: 'from-emerald-600 to-green-400',
+      heroGradient: 'from-emerald-700 via-green-500 to-teal-400',
       tags: ['Express.js', 'Node.js', 'JWT', 'FCM', 'Swagger', 'REST API', 'Multi-tenant'],
       category: 'web' as const,
       url: '#',
@@ -477,6 +483,7 @@ export const config = {
       } as LocalizedString,
       image: '/projects/barbershop-placeholder.svg',
       placeholderGradient: 'from-pink-600 to-orange-400',
+      heroGradient: 'from-pink-700 via-rose-500 to-orange-400',
       tags: ['Flutter', 'Dart', 'Firebase', 'FCM', 'Google OAuth', 'Clean Architecture', 'Provider'],
       category: 'mobile' as const,
       url: '#',
@@ -533,6 +540,7 @@ export const config = {
       } as LocalizedString,
       image: '/projects/loancore-placeholder.svg',
       placeholderGradient: 'from-violet-600 to-purple-400',
+      heroGradient: 'from-violet-700 via-purple-500 to-indigo-400',
       tags: ['.NET Core', 'Clean Architecture', 'CQRS', 'DDD', 'Next.js', 'PostgreSQL', 'JWT', 'MediatR'],
       category: 'architecture' as const,
       url: 'https://portal.loancore.net/es',

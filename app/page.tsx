@@ -11,19 +11,26 @@ import Work from '@/components/sections/Work'
 import Experience from '@/components/sections/Experience'
 import GitHubStats from '@/components/sections/GitHubStats'
 import Contact from '@/components/sections/Contact'
+import DynamicPortfolio from '@/components/dynamic/DynamicPortfolio'
 
 export default function Home() {
-  const { hasChosenTheme, gateOpen } = useThemeStore()
+  const { hasChosenTheme, gateOpen, theme } = useThemeStore()
+  const isDynamic = theme === 'dynamic'
 
   return (
     <main className="bg-[var(--bg)] min-h-screen text-[var(--text)] transition-colors duration-300">
       <AnimatePresence>
-        {gateOpen && (
-          <ExperienceGate />
-        )}
+        {gateOpen && <ExperienceGate />}
       </AnimatePresence>
 
-      {hasChosenTheme && (
+      {hasChosenTheme && isDynamic && (
+        <>
+          <Navigation />
+          <DynamicPortfolio />
+        </>
+      )}
+
+      {hasChosenTheme && !isDynamic && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

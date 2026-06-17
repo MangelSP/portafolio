@@ -8,10 +8,12 @@ interface ThemeStore {
   darkMode: boolean
   hasChosenTheme: boolean
   gateOpen: boolean
+  scrollProgress: number
   setTheme: (theme: Theme) => void
   setLocale: (locale: Locale) => void
   toggleDark: () => void
   openGate: () => void
+  setScrollProgress: (p: number) => void
   initFromStorage: () => void
 }
 
@@ -29,6 +31,7 @@ export const useThemeStore = create<ThemeStore>((set, get) => ({
   darkMode: false,
   hasChosenTheme: false,
   gateOpen: true,
+  scrollProgress: 0,
 
   setTheme: (theme) => {
     if (typeof window !== 'undefined') {
@@ -49,6 +52,8 @@ export const useThemeStore = create<ThemeStore>((set, get) => ({
   openGate: () => {
     set({ gateOpen: true, hasChosenTheme: false })
   },
+
+  setScrollProgress: (p) => set({ scrollProgress: p }),
 
   setLocale: (locale) => {
     if (typeof window !== 'undefined') {

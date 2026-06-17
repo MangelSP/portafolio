@@ -242,7 +242,7 @@ function HeroContent({
   centered = false,
   gradient = false,
 }: {
-  socialLinks: { icon: React.ElementType; href: string; label: string }[]
+  socialLinks: { icon: React.FC<{ size?: number }>; href: string; label: string }[]
   titleEl: React.ReactNode
   l: (s: { en: string; es: string }) => string
   centered?: boolean
